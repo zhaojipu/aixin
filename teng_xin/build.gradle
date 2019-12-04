@@ -1,0 +1,175 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    useLibrary 'org.apache.http.legacy'
+    flavorDimensions "default"
+    defaultConfig {
+        applicationId "com.haoniu.aixin"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        multiDexEnabled true
+        packagingOptions {
+            exclude 'META-INF/rxjava.properties'
+        }
+        ndk {
+            //选择要添加的对应 cpu 类型的 .so 库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+    }
+    signingConfigs {
+        release {
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
+            storeFile rootProject.file(KEYSTORE_FILE)
+            storePassword KEYSTORE_PASSWORD
+        }
+    }
+    buildTypes {
+        //调试版本，无混淆
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            applicationVariants.all {
+                variant ->
+                    variant.outputs.all {
+                        def appName
+                        variant.productFlavors.each {
+                            product ->
+                                appName = product.manifestPlaceholders.get("app_name")
+                        }
+                        variant.productFlavors.each {
+                            develop ->
+                                appName = develop.manifestPlaceholders.get("app_name")
+                        }
+                        variant.productFlavors.each {
+                            check ->
+                                appName = check.manifestPlaceholders.get("app_name")
+                        }
+                        outputFileName = appName + '-' + getDate() + '.apk'
+                    }
+            }
+        }
+        //发布版本，有混淆
+        release {
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    def appName
+                    variant.productFlavors.each {
+                        product ->
+                            appName = product.manifestPlaceholders.get("app_name")
+                    }
+                    variant.productFlavors.each {
+                        develop ->
+                            appName = develop.manifestPlaceholders.get("app_name")
+                    }
+                    variant.productFlavors.each {
+                        check ->
+                            appName = check.manifestPlaceholders.get("app_name")
+                    }
+                    outputFileName = appName + '-' + getDate() + '.apk'
+                }
+            }
+        }
+    }
+    productFlavors {
+        //开发环境
+        develop {
+            buildConfigField "String", "BASEURL", URLDEVELOP
+            resValue "string", "app_name", "爱聊（开发）"
+            buildConfigField "String","TUIGUANGURL",TUIGUANGURLDEV
+            //是否加密
+            buildConfigField "Boolean", "ISENCRYPTION", ISENCRYPTIONDEV
+            buildConfigField "String","HXBIEMING" ,HXBIEMINGDEV
+            manifestPlaceholders = [
+                    app_name: "爱聊（开发）",
+                    EASEMOB_APPKEY: EASEMOB_APPKEYCHECK,
+
+            ]
+        }
+        //测试环境
+        check {
+            buildConfigField "String", "BASEURL", UELCHECK
+            resValue "string", "app_name", "爱聊"
+            buildConfigField "String","TUIGUANGURL",TUIGUANGURLCHECK
+            //是否加密
+            buildConfigField "Boolean", "ISENCRYPTION", ISENCRYPTIONCHE
+            buildConfigField "String","HXBIEMING" ,HXBIEMINGCHECK
+            manifestPlaceholders = [
+                    app_name: "爱聊",
+                    EASEMOB_APPKEY: EASEMOB_APPKEYDEV,
+            ]
+        }
+        //生产环境
+        product {
+            buildConfigField "String", "BASEURL", URLPRODUCTIP
+            resValue "string", "app_name", "爱聊"
+            buildConfigField "String","TUIGUANGURL",TUIGUANGURL
+            //是否加密
+            buildConfigField "Boolean", "ISENCRYPTION", ISENCRYPTION
+            buildConfigField "String","HXBIEMING" ,HXBIEMING
+            manifestPlaceholders = [
+                    app_name: "爱聊",
+                    EASEMOB_APPKEY: EASEMOB_APPKEY,
+            ]
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildToolsVersion '28.0.3'
+}
+//获取时间
+def getDate() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC")) + "-" + new Date().getTime();
+}
+
+dependencies {
+    // compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["support-v4"]
+    implementation rootProject.ext.dependencies["design"]
+    implementation rootProject.ext.dependencies["annotations"]
+    implementation rootProject.ext.dependencies["recyclerview-v7"]
+    implementation rootProject.ext.dependencies["multidex"]
+    implementation rootProject.ext.dependencies["cardview"]
+    implementation rootProject.ext.dependencies["butterknife"]
+    annotationProcessor rootProject.ext.dependencies["butterknife-Processor"]
+    implementation rootProject.ext.dependencies["imagepicker"]
+    implementation rootProject.ext.dependencies["grantor"]
+    implementation rootProject.ext.dependencies["SmartRefreshLayout"]
+    implementation rootProject.ext.dependencies["SmartRefreshHeader"]
+    implementation rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+    implementation rootProject.ext.dependencies["takephoto"]
+    implementation rootProject.ext.dependencies["PictureSelector"]
+    // banner 广告
+    implementation rootProject.ext.dependencies["banner"]
+    //banner
+    implementation rootProject.ext.dependencies["magic-viewpager"]
+    //微信
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    implementation 'com.google.android.gms:play-services-base:11.4.0'
+    implementation rootProject.ext.dependencies["myTabLayout"]
+    implementation project(':AndroidBase')
+    //日历
+    implementation 'com.prolificinteractive:material-calendarview:1.4.3'
+    implementation files('libs/hyphenatechat_3.3.7.jar')
+    implementation files('libs/HMSSdkBase_2.5.1.300.jar')
+    implementation files('libs/HMSSdkPush_2.5.1.300.jar')
+    implementation files('libs/MiPush_SDK_Client_2_2_19.jar')
+    implementation files('libs/alipaySdk-20180601.jar')
+}

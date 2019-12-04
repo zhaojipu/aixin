@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.haoniu.aixin.widget.ContactItemView
+        android:id="@+id/item_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contactItemImage="@mipmap/img_new_wodeshangji"
+        app:contactItemName="我的上级"/>
+
+    <com.haoniu.aixin.widget.ContactItemView
+        android:id="@+id/item_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contactItemImage="@mipmap/img_new_qunzhu"
+        app:contactItemName="群主"/>
+
+    <com.haoniu.aixin.widget.ContactItemView
+        android:id="@+id/item_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contactItemImage="@mipmap/img_new_rengongcz"
+        app:contactItemName="人工充值客服"/>
+    <com.haoniu.aixin.widget.ContactItemView
+        android:id="@+id/item_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contactItemImage="@mipmap/img_new_youxiwenti"
+        app:contactItemName="游戏问题客服"/>
+
+
+</LinearLayout>

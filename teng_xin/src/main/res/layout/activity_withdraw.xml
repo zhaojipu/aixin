@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7F7"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_5"
+        android:background="#F7F7F7" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bor_white_8"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_15"
+            android:paddingBottom="@dimen/dp_14">
+            <LinearLayout
+                android:id="@+id/ll_zhanghu"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_58"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                >
+                <TextView
+                    android:id="@+id/tv_zhanghu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="请选择提现账户"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="#333333"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dp_18"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/img_back_right"
+                    android:layout_marginRight="@dimen/dp_20"
+                    />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="#F7F7F7" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp_19"
+                    android:text="提现金额"
+                    android:textColor="#5D5D5D"
+                    android:textSize="@dimen/sp_13" />
+
+                <TextView
+                    android:id="@+id/tv_lv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/dp_11"
+                    android:text="（当前手续费率为1.00%）"
+                    android:textColor="@color/grey_2"
+                    android:textSize="@dimen/sp_14"
+                    android:visibility="gone"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:gravity="center_vertical"
+                    android:text="￥"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/sp_21" />
+
+                <EditText
+                    android:id="@+id/et_money"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="请输入提现金额"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:paddingBottom="@dimen/dp_5"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_20"
+                    android:paddingTop="@dimen/dp_5"
+                    android:text=""
+                    android:textColor="@color/blue3"
+                    android:textSize="@dimen/sp_22"
+                    />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_1"
+                android:background="#F7F7F7" />
+
+            <TextView
+                android:id="@+id/tv_haveMoney"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_18"
+                android:paddingTop="@dimen/dp_15"
+                android:text="零钱剩余，最低起提"
+                android:textColor="#999999"
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_18"
+                android:layout_marginTop="@dimen/dp_24"
+                android:text="提现须知"
+                android:textColor="#ffff392f"
+                android:textSize="@dimen/sp_13"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_18"
+                android:layout_marginTop="@dimen/dp_9"
+                android:text="提现必须达到充值、转账金额的30%流水，否则无法提现！"
+                android:textColor="#ffff392f"
+                android:textSize="@dimen/sp_13"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_submit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_48"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/dp_15"
+                android:layout_marginLeft="@dimen/dp_13"
+                android:layout_marginTop="@dimen/dp_40"
+                android:layout_marginRight="@dimen/dp_13"
+                android:background="@drawable/bg_border_new_chongzhi"
+                android:gravity="center"
+                android:text="申请提现"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/tv_submit"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/dp_16"
+                android:text="提现时间"
+                android:textColor="#999999"
+                android:textSize="@dimen/sp_12" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
