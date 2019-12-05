@@ -88,7 +88,7 @@ public class SendRedPaketLeiActivity extends BaseActivity {
     RelativeLayout rel0;
     private String touserName;
     private RoomInfo roomInfo;
-
+    private int amount;
     /**
      * 替代onCreate的使用
      *
@@ -111,6 +111,7 @@ public class SendRedPaketLeiActivity extends BaseActivity {
                     tvFenwei.setText("红包发布范围：" + roomLeiListBean.getMoneyMin() + "-" + roomLeiListBean.getMoneyMax() + "元");
                     tvLv.setText("游戏倍数：" + roomLeiListBean.getOneLei());
                     tvNumber.setText(roomLeiListBean.getAmount() + "个");
+                    amount = roomLeiListBean.getAmount();
                 }
             }
         }
@@ -166,6 +167,7 @@ public class SendRedPaketLeiActivity extends BaseActivity {
 //        map.put("payPassword", password);
         map.put("thunderPoint", point);
         map.put("type", 1);
+        map.put("amount", amount);
         ApiClient.requestNetHandle(this, AppConfig.sendCLRedEnvelope, "正在发红包...", map, new ResultListener() {
             /**
              * 请求成功

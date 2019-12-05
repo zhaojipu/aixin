@@ -201,6 +201,7 @@ public class SendRedPaketLei2Activity extends BaseActivity {
         map.put("payPassword", password);
         map.put("thunderPoint", point);
         map.put("type", 2);
+        map.put("amount", amount==0 ? this.roomLeiListBean.getAmount():amount);
         ApiClient.requestNetHandle(this, AppConfig.sendCLRedEnvelope, "正在发红包...", map, new ResultListener() {
             /**
              * 请求成功
